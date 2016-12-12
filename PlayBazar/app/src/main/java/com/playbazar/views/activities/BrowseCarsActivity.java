@@ -1,5 +1,11 @@
 package com.playbazar.views.activities;
 
+/**
+ * Created by pvkarthik on 2016-12-05.
+ *
+ * Initial launch activity which will get displayed on first launch of application.
+ */
+
 import android.os.Bundle;
 
 import com.playbazar.R;

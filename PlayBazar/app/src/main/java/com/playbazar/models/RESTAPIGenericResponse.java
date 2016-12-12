@@ -1,11 +1,18 @@
 package com.playbazar.models;
 
+/**
+ * Created by pvkarthik on 2016-12-06.
+ *
+ * Generic class (JSON Pojo).
+ * A Pojo which represents data received from server.
+ */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
-public class ServerAPIResponse {
+public class RESTApiGenericResponse {
 
 	@SerializedName("page")
 	@Expose

@@ -1,5 +1,11 @@
 package com.playbazar.views.fragments;
 
+/**
+ * Created by pvkarthik on 2016-12-05.
+ *
+ * Cars fragment which displays server data in a recycler view.
+ */
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +21,7 @@ import com.playbazar.logging.DefaultLogger;
 import com.playbazar.models.FilterItem;
 import com.playbazar.models.ManufacturerFilterItem;
 import com.playbazar.models.ModelFilterItem;
-import com.playbazar.models.ServerAPIResponse;
+import com.playbazar.models.RESTApiGenericResponse;
 import com.playbazar.presenters.BrowseCarsPresenter;
 import com.playbazar.presenters.ViewState;
 import com.playbazar.views.BrowseCarsView;
@@ -112,8 +118,8 @@ public class BrowseCarsFragment extends BaseFragment implements BrowseCarsView {
 	}
 
 	@Override
-	public void onDataReceived(ServerAPIResponse serverAPIResponse) {
-		mAdapter.addData(serverAPIResponse);
+	public void onDataReceived(RESTApiGenericResponse RESTApiGenericResponse) {
+		mAdapter.addData(RESTApiGenericResponse);
 	}
 
 	@Override
@@ -145,9 +151,8 @@ public class BrowseCarsFragment extends BaseFragment implements BrowseCarsView {
 				.inflate(R.layout.view_selected_filter, mCarsMetaDataView, false);
 		TextView filterTxtView = (TextView) view.findViewById(R.id.filter_name);
 		filterTxtView.setText(filterItem.getText());
-		TextView removeBtn = (TextView) view.findViewById(R.id.removeBtn);
-		removeBtn.setTag(filterItem);
-		removeBtn.setOnClickListener(new View.OnClickListener() {
+		view.setTag(filterItem);
+		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				FilterItem filterItem = (FilterItem) view.getTag();

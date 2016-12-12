@@ -1,5 +1,11 @@
 package com.playbazar;
 
+/**
+ * Created by pvkarthik on 2016-12-05.
+ *
+ * Application which will initialize DI graph.
+ */
+
 import android.app.Application;
 
 import com.playbazar.di.components.ApplicationComponent;

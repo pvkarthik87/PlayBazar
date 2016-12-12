@@ -1,18 +1,19 @@
 package com.playbazar.views.activities;
 
+/**
+ * Created by pvkarthik on 2016-12-05.
+ *
+ * BaseActivity which all other activities should inherit to simplify DI .
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.playbazar.PlayBazarApplication;
 import com.playbazar.di.components.ApplicationComponent;
 import com.playbazar.di.modules.ActivityModule;
-import com.playbazar.logging.DefaultLogger;
 
 import butterknife.ButterKnife;
 
@@ -72,24 +73,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		unBindViews();
 		super.onDestroy();
-	}
-
-	public void showDialog(DialogFragment fragment, String tag) {
-		FragmentManager fragmentManager = this.getSupportFragmentManager();
-		FragmentTransaction ft = fragmentManager.beginTransaction();
-		Fragment prev = fragmentManager.findFragmentByTag(tag);
-		if (prev != null) {
-			ft.remove(prev);
-		}
-		ft.addToBackStack(null);
-
-		// Create and show the dialog.
-		try {
-			fragment.show(ft, tag);
-			DefaultLogger.d("", "showDialog - " + tag);
-		} catch (IllegalStateException e) {
-			DefaultLogger.e("", "showDialog - could not show dialog - " + tag + ": ", e);
-		}
 	}
 
 	private void bindViews(View view) {

@@ -2,6 +2,9 @@ package com.playbazar.models;
 
 /**
  * Created by pvkarthik on 2016-12-06.
+ *
+ * Every filter should extend from this class which helps in simplifying
+ * data access.
  */
 
 public abstract class FilterItem {

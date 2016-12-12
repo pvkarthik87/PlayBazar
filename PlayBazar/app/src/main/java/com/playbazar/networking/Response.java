@@ -1,5 +1,11 @@
 package com.playbazar.networking;
 
+/**
+ * Created by pvkarthik on 2016-12-04.
+ *
+ * JSON POJO.
+ */
+
 import com.google.gson.annotations.SerializedName;
 
 public class Response {

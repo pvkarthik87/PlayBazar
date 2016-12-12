@@ -1,6 +1,6 @@
 package com.playbazar;
 
-import com.playbazar.models.ServerAPIResponse;
+import com.playbazar.models.RESTApiGenericResponse;
 import com.playbazar.networking.ApiRepo;
 import com.playbazar.presenters.BrowseCarsPresenter;
 import com.playbazar.presenters.BrowseCarsPresenterImpl;
@@ -23,7 +23,6 @@ import java.util.Map;
 import rx.Subscription;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -56,13 +55,13 @@ public class BrowseCarsPresenterTest {
 		doAnswer(new Answer() {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
-				ServerAPIResponse serverAPIResponse = new ServerAPIResponse();
+				RESTApiGenericResponse RESTApiGenericResponse = new RESTApiGenericResponse();
 				Map<String, String> dataMap = new HashMap<>(4);
-				serverAPIResponse.setWkda(dataMap);
-				((ApiRepo.GetManufacturerListCallback) presenter).onSuccess(serverAPIResponse);
+				RESTApiGenericResponse.setWkda(dataMap);
+				((ApiRepo.RESTApiCallback) presenter).onSuccess(RESTApiGenericResponse);
 				return Mockito.mock(Subscription.class);
 			}
-		}).when(model).getManufacturerList(0, (ApiRepo.GetManufacturerListCallback) presenter);
+		}).when(model).getManufacturerList(0, (ApiRepo.RESTApiCallback) presenter);
 	}
 
 	/**
@@ -73,8 +72,8 @@ public class BrowseCarsPresenterTest {
 	public void testFetchAll() {
 		presenter.loadPage(0);
 		// verify can be called only on mock objects
-		verify(model, times(1)).getManufacturerList(0, (ApiRepo.GetManufacturerListCallback) presenter);
-		verify(view, times(1)).onDataReceived(any(ServerAPIResponse.class));
+		verify(model, times(1)).getManufacturerList(0, (ApiRepo.RESTApiCallback) presenter);
+		verify(view, times(1)).onDataReceived(any(RESTApiGenericResponse.class));
 	}
 
 }

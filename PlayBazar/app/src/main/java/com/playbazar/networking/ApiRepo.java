@@ -1,7 +1,7 @@
 package com.playbazar.networking;
 
 import com.playbazar.logging.DefaultLogger;
-import com.playbazar.models.ServerAPIResponse;
+import com.playbazar.models.RESTApiGenericResponse;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -12,6 +12,8 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by pvkarthik on 2016-12-04.
+ *
+ * REST Client which communicates to server to perform some operations
  */
 
 public class ApiRepo {
@@ -24,17 +26,17 @@ public class ApiRepo {
 		this.mRestService = restService;
 	}
 
-	public Subscription getManufacturerList(int pageNo, final GetManufacturerListCallback callback) {
+	public Subscription getManufacturerList(int pageNo, final RESTApiCallback callback) {
 		return mRestService.getManufacturerList(pageNo)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeOn(Schedulers.newThread())
-				.onErrorResumeNext(new Func1<Throwable, Observable<? extends ServerAPIResponse>>() {
+				.onErrorResumeNext(new Func1<Throwable, Observable<? extends RESTApiGenericResponse>>() {
 					@Override
-					public Observable<? extends ServerAPIResponse> call(Throwable throwable) {
+					public Observable<? extends RESTApiGenericResponse> call(Throwable throwable) {
 						return Observable.error(throwable);
 					}
 				})
-				.subscribe(new Subscriber<ServerAPIResponse>() {
+				.subscribe(new Subscriber<RESTApiGenericResponse>() {
 					@Override
 					public void onCompleted() {
 						DefaultLogger.d(TAG, "onCompleted");
@@ -47,24 +49,24 @@ public class ApiRepo {
 					}
 
 					@Override
-					public void onNext(ServerAPIResponse serverAPIResponse) {
+					public void onNext(RESTApiGenericResponse RESTApiGenericResponse) {
 						DefaultLogger.d(TAG, "onNext");
-						callback.onSuccess(serverAPIResponse);
+						callback.onSuccess(RESTApiGenericResponse);
 					}
 				});
 	}
 
-	public Subscription getModelList(int pageNo, String manufacturer, final GetManufacturerListCallback callback) {
+	public Subscription getModelList(int pageNo, String manufacturer, final RESTApiCallback callback) {
 		return mRestService.getManufacturerModelList(pageNo, manufacturer)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeOn(Schedulers.newThread())
-				.onErrorResumeNext(new Func1<Throwable, Observable<? extends ServerAPIResponse>>() {
+				.onErrorResumeNext(new Func1<Throwable, Observable<? extends RESTApiGenericResponse>>() {
 					@Override
-					public Observable<? extends ServerAPIResponse> call(Throwable throwable) {
+					public Observable<? extends RESTApiGenericResponse> call(Throwable throwable) {
 						return Observable.error(throwable);
 					}
 				})
-				.subscribe(new Subscriber<ServerAPIResponse>() {
+				.subscribe(new Subscriber<RESTApiGenericResponse>() {
 					@Override
 					public void onCompleted() {
 						DefaultLogger.d(TAG, "onCompleted");
@@ -77,24 +79,24 @@ public class ApiRepo {
 					}
 
 					@Override
-					public void onNext(ServerAPIResponse serverAPIResponse) {
+					public void onNext(RESTApiGenericResponse RESTApiGenericResponse) {
 						DefaultLogger.d(TAG, "onNext");
-						callback.onSuccess(serverAPIResponse);
+						callback.onSuccess(RESTApiGenericResponse);
 					}
 				});
 	}
 
-	public Subscription getModelYearList(String manufacturer, String model, final GetManufacturerListCallback callback) {
+	public Subscription getModelYearList(String manufacturer, String model, final RESTApiCallback callback) {
 		return mRestService.getManufacturerModelYearList(manufacturer, model)
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeOn(Schedulers.newThread())
-				.onErrorResumeNext(new Func1<Throwable, Observable<? extends ServerAPIResponse>>() {
+				.onErrorResumeNext(new Func1<Throwable, Observable<? extends RESTApiGenericResponse>>() {
 					@Override
-					public Observable<? extends ServerAPIResponse> call(Throwable throwable) {
+					public Observable<? extends RESTApiGenericResponse> call(Throwable throwable) {
 						return Observable.error(throwable);
 					}
 				})
-				.subscribe(new Subscriber<ServerAPIResponse>() {
+				.subscribe(new Subscriber<RESTApiGenericResponse>() {
 					@Override
 					public void onCompleted() {
 						DefaultLogger.d(TAG, "onCompleted");
@@ -107,15 +109,15 @@ public class ApiRepo {
 					}
 
 					@Override
-					public void onNext(ServerAPIResponse serverAPIResponse) {
+					public void onNext(RESTApiGenericResponse RESTApiGenericResponse) {
 						DefaultLogger.d(TAG, "onNext");
-						callback.onSuccess(serverAPIResponse);
+						callback.onSuccess(RESTApiGenericResponse);
 					}
 				});
 	}
 
-	public interface GetManufacturerListCallback {
-		void onSuccess(ServerAPIResponse serverAPIResponse);
+	public interface RESTApiCallback {
+		void onSuccess(RESTApiGenericResponse response);
 
 		void onError(NetworkError networkError);
 	}

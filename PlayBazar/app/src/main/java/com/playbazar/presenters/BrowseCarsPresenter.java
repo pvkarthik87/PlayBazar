@@ -5,6 +5,9 @@ import com.playbazar.views.BrowseCarsView;
 
 /**
  * Created by pvkarthik on 2016-12-05.
+ *
+ * Presenter interface.
+ *
  */
 
 public interface BrowseCarsPresenter extends Presenter {

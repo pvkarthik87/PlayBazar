@@ -1,7 +1,9 @@
 package com.playbazar.mvputils;
 
 /**
- * Interface representing a Presenter in a model view presenter (MVP) pattern.
+ * Created by pvkarthik on 2016-12-06.
+ *
+ *Interface representing a Presenter in a model view presenter (MVP) pattern.
  */
 public interface Presenter {
   /**

@@ -1,5 +1,11 @@
 package com.playbazar.networking;
 
+/**
+ * Created by pvkarthik on 2016-12-04.
+ *
+ * Handles detecting error scenarios.
+ */
+
 import android.text.TextUtils;
 
 import com.google.gson.Gson;

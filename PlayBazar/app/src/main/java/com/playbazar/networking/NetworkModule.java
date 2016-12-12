@@ -1,5 +1,11 @@
 package com.playbazar.networking;
 
+/**
+ * Created by pvkarthik on 2016-12-04.
+ *
+ * Dagger module which is responsible for providing objects injected variables.
+ */
+
 import com.playbazar.BuildConfig;
 import com.playbazar.PlayBazarApplication;
 

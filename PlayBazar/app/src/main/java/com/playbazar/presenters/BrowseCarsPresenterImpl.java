@@ -2,7 +2,7 @@ package com.playbazar.presenters;
 
 import com.playbazar.models.ManufacturerFilterItem;
 import com.playbazar.models.ModelFilterItem;
-import com.playbazar.models.ServerAPIResponse;
+import com.playbazar.models.RESTApiGenericResponse;
 import com.playbazar.networking.ApiRepo;
 import com.playbazar.networking.NetworkError;
 import com.playbazar.views.BrowseCarsView;
@@ -14,9 +14,11 @@ import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by pvkarthik on 2016-12-05.
+ *
+ * Presenter implementation which handles core features.
  */
 
-public class BrowseCarsPresenterImpl implements BrowseCarsPresenter, ApiRepo.GetManufacturerListCallback {
+public class BrowseCarsPresenterImpl implements BrowseCarsPresenter, ApiRepo.RESTApiCallback {
 
 	private static BrowseCarsPresenterImpl mInstance;
 	private BrowseCarsView mView;
@@ -129,10 +131,10 @@ public class BrowseCarsPresenterImpl implements BrowseCarsPresenter, ApiRepo.Get
 	}
 
 	@Override
-	public void onSuccess(ServerAPIResponse serverAPIResponse) {
+	public void onSuccess(RESTApiGenericResponse RESTApiGenericResponse) {
 		mIsLoading = false;
 		if (mView != null) {
-			mView.onDataReceived(serverAPIResponse);
+			mView.onDataReceived(RESTApiGenericResponse);
 		}
 	}
 

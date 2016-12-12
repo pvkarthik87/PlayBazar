@@ -1,5 +1,11 @@
 package com.playbazar.views.adapters;
 
+/**
+ * Created by pvkarthik on 2016-12-05.
+ *
+ * Recycler view adapter which displays data.
+ */
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,7 +18,7 @@ import com.paginate.recycler.LoadingListItemCreator;
 import com.playbazar.PlayBazarApplication;
 import com.playbazar.R;
 import com.playbazar.config.Constants;
-import com.playbazar.models.ServerAPIResponse;
+import com.playbazar.models.RESTApiGenericResponse;
 import com.playbazar.presenters.BrowseCarsPresenter;
 
 import java.util.ArrayList;
@@ -98,12 +104,12 @@ public class CarsDataAdapter extends RecyclerView.Adapter<CarsDataViewHolder> {
 		return VIEW_TYPE_ODD;
 	}
 
-	public void addData(ServerAPIResponse serverAPIResponse) {
-		if(serverAPIResponse != null) {
-			Map<String, String> serverNewData = serverAPIResponse.getWkda();
+	public void addData(RESTApiGenericResponse RESTApiGenericResponse) {
+		if(RESTApiGenericResponse != null) {
+			Map<String, String> serverNewData = RESTApiGenericResponse.getWkda();
 			if(serverNewData != null) {
-				if(serverAPIResponse.getTotalPageCount() != null) {
-					mMaxPages = serverAPIResponse.getTotalPageCount();
+				if(RESTApiGenericResponse.getTotalPageCount() != null) {
+					mMaxPages = RESTApiGenericResponse.getTotalPageCount();
 				} else {
 					mMaxPages = 1;
 				}
@@ -112,7 +118,7 @@ public class CarsDataAdapter extends RecyclerView.Adapter<CarsDataViewHolder> {
 				mDataList.clear();
 				mDataList.addAll(mDataMap.keySet());
 				int newSize = mDataList.size();
-				Integer currentPage = serverAPIResponse.getPage();
+				Integer currentPage = RESTApiGenericResponse.getPage();
 				if(currentPage != null && currentPage >= 1 ) {
 					notifyItemRangeInserted(oldSize, newSize - oldSize);
 				} else {
